@@ -6,7 +6,6 @@
 </head>
 <body>
 
-
 <!-- get …… 送信内容がURLとして渡される(初期値) -->
 <!-- post …… 本文(本体)として送信される -->
 <form action="calc.php" method="post">
@@ -27,7 +26,6 @@
 
     = ?
 
-
     <input type="hidden" name="sousin" value="1">
 
 
@@ -41,17 +39,12 @@
 </form>
 
 <?php
-ini_set( 'display_errors', 1 );
 header("Content-Type: text/html; charset=UTF-8");
-
-var_dump($_POST);
 
 // getで数字などを取得
 $message1 = htmlspecialchars($_POST['message1']);
 $message2 = htmlspecialchars($_POST['message2']);
 $calc1 = $_REQUEST['calc'];
-
-
 
 // 取得した数字をstring型に変換
 $message3 = (string)$message1;
