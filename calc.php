@@ -5,7 +5,6 @@
     <title>電卓</title>
 </head>
 <body>
-<!-- get …… 送信内容がURLとして渡される(初期値) -->
 <!-- post …… 本文(本体)として送信される -->
 <form action="calc.php" method="post">
 
@@ -52,17 +51,15 @@ if(isset($_POST['message1']) && isset($_POST['message2']) && isset($_POST['calc'
         switch($calc1){
             case "+":
                 $sum = $message1 + $message2;
-                //            print $sum;
                 break;
             case "-":
                 $sum = $message1 - $message2;
-                //            print $sum;
                 break;
             case "*":
                 $sum = $message1 * $message2;
-                //            print $sum;
                 break;
             case "/":
+                // 割り算のみ 0を避ける
                 if($message1 == 0) {
                     break;
                 }
