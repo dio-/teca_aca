@@ -35,7 +35,6 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
 
-
 if(isset($_POST['message1']) && isset($_POST['message2']) && isset($_POST['calc'])) {
     $message1 = htmlspecialchars($_POST['message1']);
     $message2 = htmlspecialchars($_POST['message2']);
@@ -48,27 +47,30 @@ if(isset($_POST['message1']) && isset($_POST['message2']) && isset($_POST['calc'
 
     // 数字だったら計算する、数字じゃなかったらエラーを出力
     if (is_numeric($str_message1) && is_numeric($str_message2)) {
-        switch($calc1){
+        switch($calc1) {
             case "+":
                 $sum = $message1 + $message2;
+                print ($message1 . " " . $calc1 . " " . $message2 . " = " . $sum . "\n");
                 break;
             case "-":
                 $sum = $message1 - $message2;
+                print ($message1 . " " . $calc1 . " " . $message2 . " = " . $sum . "\n");
                 break;
             case "*":
                 $sum = $message1 * $message2;
+                print ($message1 . " " . $calc1 . " " . $message2 . " = " . $sum . "\n");
                 break;
             case "/":
                 // 割り算のみ 0を避ける
-                if($message1 == 0) {
-                    break;
-                }
-                else{
+                if ($message1 == 0) {
+                    print ("0で割れないです。");
+                    //break;
+                } else {
                     $sum = $message1 / $message2;
+                    print ($message1 . " " . $calc1 . " " . $message2 . " = " . $sum . "\n");
                     break;
                 }
         }
-        print ($message1." ".$calc1." ".$message2." = ".$sum."\n");
     }
     else{
         print "半角数字を入れてください";
