@@ -1,3 +1,55 @@
+<?php
+header("Content-Type: text/html; charset=UTF-8");
+
+if(isset($_POST['num1']) && isset($_POST['num2']) && isset($_POST['calc1'])) {
+    $num1 = htmlspecialchars($_POST['num1']);
+    $num2 = htmlspecialchars($_POST['num2']);
+    $calc1 = $_POST['calc1'];
+
+    // セレクトボタンの値の保持
+    $selected = array(); 
+    $selected[$calc1] = "selected";
+ 
+    // リセットボタンの処理
+    $reset = $_POST['reset'];
+    if(isset($reset)){
+       $num1 = ""; // 1番目の数字
+       $calc1 = ""; // 和差積商
+       $num2 = ""; // 2番目の数字
+       $sum = "?"; //答え
+    }
+
+    // 数字だったら計算する、数字じゃなかったらエラーを出力
+    if (is_numeric($num1) && is_numeric($num2)) {
+        switch($calc1) {
+            case 0: // 足し算
+                $sum = $num1 + $num2;
+                break;
+            case 1: // 引き算
+                $sum = $num1 - $num2;
+		break;
+            case 2: // 掛け算
+                $sum = $num1 * $num2;
+                break;
+            case 3: // 割り算
+                if ($num2 == 0) {  // 割り算のみ 0を避ける
+                    print ("0で割れないです。");
+                    $sum = "×";
+                    break;
+                } else {
+                    $sum = $num1 / $num2;
+                    break;
+                }
+        }
+    }else{
+        print "半角数字を入れてください";
+    }
+}else{
+   print "数値を入れてください";
+   $sum = "?";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,78 +58,31 @@
 </head>
 <body>
 <!-- post …… 本文(本体)として送信される -->
-<form action="calc.php" method="post">
+<form method="post">
 
     <!-- 最初の数字 -->
-    <input type="text" name="message1">
+    <input type="text" name="num1" value="<?php echo "$num1" ?>" >
 
     <!-- セレクトボタン -->
-    <select name="calc" title="2">
-        <option value="+">+</option>
-        <option value="-">-</option>
-        <option value="*">×</option>
-        <option value="/">÷</option>
+    <select name="calc1" >
+        <option value=0 <?php echo $selected[0]; ?> >+</option>
+        <option value=1 <?php echo $selected[1]; ?> >-</option>
+        <option value=2 <?php echo $selected[2]; ?> >×</option>
+        <option value=3 <?php echo $selected[3]; ?> >÷</option>
     </select>
 
     <!-- ２つ目の数字 -->
-    <input type="text" name="message2">
+    <input type="text" name="num2" value="<?php echo "$num2" ?>" >
 
-    = ?<br>
+    <!-- 答え -->
+    <?php print "=".$sum; ?>
 
-    <!-- 計算ボタン -->
-    <input type="submit" value="送信">
+    <!-- 送信ボタン -->
+    </br><input type="submit" value="送信">
 
     <!-- リセットボタン -->
-    <input type="reset" value="リセット">
+    <input type="submit" name="reset" value="リセット">
 
 </form>
-
-<?php
-header("Content-Type: text/html; charset=UTF-8");
-
-if(isset($_POST['message1']) && isset($_POST['message2']) && isset($_POST['calc'])) {
-    $message1 = htmlspecialchars($_POST['message1']);
-    $message2 = htmlspecialchars($_POST['message2']);
-    $calc1 = $_POST['calc'];
-
-    // 取得した数字をstring型に変換
-    $str_message1 = (string)$message1;
-    $str_message2 = (string)$message2;
-
-
-    // 数字だったら計算する、数字じゃなかったらエラーを出力
-    if (is_numeric($str_message1) && is_numeric($str_message2)) {
-        switch($calc1) {
-            case "+":
-                $sum = $message1 + $message2;
-                print ($message1 . " " . $calc1 . " " . $message2 . " = " . $sum . "\n");
-                break;
-            case "-":
-                $sum = $message1 - $message2;
-                print ($message1 . " " . $calc1 . " " . $message2 . " = " . $sum . "\n");
-                break;
-            case "*":
-                $sum = $message1 * $message2;
-                print ($message1 . " " . $calc1 . " " . $message2 . " = " . $sum . "\n");
-                break;
-            case "/":
-                // 割り算のみ 0を避ける
-                if ($message1 == 0) {
-                    print ("0で割れないです。");
-                    //break;
-                } else {
-                    $sum = $message1 / $message2;
-                    print ($message1 . " " . $calc1 . " " . $message2 . " = " . $sum . "\n");
-                    break;
-                }
-        }
-    }
-    else{
-        print "半角数字を入れてください";
-    }
-}
-
-?>
-
 </body>
 </html>
