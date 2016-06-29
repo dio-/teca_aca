@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
 
-if(isset($_POST['num1']) && isset($_POST['num2']) && isset($_POST['calc1'])) {
+if(isset($_POST['num1']) && isset($_POST['calc1'])) {
     $num1 = htmlspecialchars($_POST['num1']);
     $num2 = htmlspecialchars($_POST['num2']);
     $calc1 = $_POST['calc1'];
@@ -16,28 +16,28 @@ if(isset($_POST['num1']) && isset($_POST['num2']) && isset($_POST['calc1'])) {
        $num1 = ""; // 1番目の数字
        $calc1 = ""; // 和差積商
        $num2 = ""; // 2番目の数字
-       $sum = "?"; //答え
+       $result = "?"; //答え
     }
 
     // 数字だったら計算する、数字じゃなかったらエラーを出力
     if (is_numeric($num1) && is_numeric($num2)) {
         switch($calc1) {
             case 0: // 足し算
-                $sum = $num1 + $num2;
+                $result = $num1 + $num2;
                 break;
             case 1: // 引き算
-                $sum = $num1 - $num2;
+                $result = $num1 - $num2;
 		break;
             case 2: // 掛け算
-                $sum = $num1 * $num2;
+                $result = $num1 * $num2;
                 break;
             case 3: // 割り算
                 if ($num2 == 0) {  // 割り算のみ 0を避ける
                     print ("0で割れないです。");
-                    $sum = "×";
+                    $result = "×";
                     break;
                 } else {
-                    $sum = $num1 / $num2;
+                    $result = $num1 / $num2;
                     break;
                 }
         }
@@ -46,7 +46,7 @@ if(isset($_POST['num1']) && isset($_POST['num2']) && isset($_POST['calc1'])) {
     }
 }else{
    print "数値を入れてください";
-   $sum = "?";
+   $result = "?";
 }
 ?>
 
@@ -75,7 +75,7 @@ if(isset($_POST['num1']) && isset($_POST['num2']) && isset($_POST['calc1'])) {
     <input type="text" name="num2" value="<?php echo "$num2" ?>" >
 
     <!-- 答え -->
-    <?php print "=".$sum; ?>
+    <?php print "=".$result; ?>
 
     <!-- 送信ボタン -->
     </br><input type="submit" value="送信">
