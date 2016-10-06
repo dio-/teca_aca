@@ -1,0 +1,27 @@
+<?php
+session_start();
+ 
+header("Content-type: text/html; charset=utf-8");
+ 
+// ログイン状態のチェック
+if (!isset($_SESSION["name"])) {
+    header("Location: test.php");
+    exit();
+}
+ 
+//セッション変数を全て解除
+$_SESSION = array();
+ 
+//セッションクッキーの削除
+if (isset($_COOKIE["PHPSESSID"])) {
+    setcookie("PHPSESSID", '', time() - 1800, '/');
+}
+ 
+//セッションを破棄する
+session_destroy();
+ 
+echo "<p>ログアウトしました。</p>";
+ 
+echo "<a href='login.php'>ログイン画面へ</a>";
+
+?>
