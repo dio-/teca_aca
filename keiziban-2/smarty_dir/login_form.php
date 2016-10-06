@@ -12,7 +12,7 @@ $smarty->cache_dir    = '/home/miyuki/github/teca_aca/keiziban-2/smarty_dir/cach
 $name = $_POST['name'];
 $password = $_POST['password'];
 
-$smarty->display('login_form.html');
+$smarty->display('login_form.tpl');
 
 
 print $name;
@@ -45,8 +45,8 @@ if(count($errors) === 0){
 }else{
     if(count($errors) > 0):
         foreach($errors as $value){
-           // echo "<p>".$value."</p>";
-            $smarty->assign('value', $value);//ここからlogin_form.tplの{$value}に表示させる
+            echo "<p>".$value."</p>";
+            //$smarty->assign('value', $value);//ここからlogin_form.tplの{$value}に表示させる
     }   
     endif;
 }
