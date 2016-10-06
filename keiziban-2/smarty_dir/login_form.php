@@ -26,7 +26,7 @@ if(empty($_POST)) {
 }else{
     // アカウントの入力判定
     if ($name == '') {
-        $errors['name'] = "IDがないよぉ";
+        $errors['name'] = "IDがないです。";
     }
 
     // パスワードの入力判定
