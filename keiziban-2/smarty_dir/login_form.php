@@ -14,8 +14,6 @@ $password = $_POST['password'];
 
 
 
-//print $name;
-//print $password;
 
 $smarty->assign('name', $name);
 $smarty->assign('password', $password);
@@ -26,7 +24,7 @@ $smarty->display('login_form.tpl');
 $errors = array();
 
 if(empty($_POST)) {
-    //header("Location: login_.php");
+    //header("Location: login_form.php"); //headerが使えない
 }else{
     // アカウントの入力判定
     if ($name == '') {
@@ -46,21 +44,15 @@ if(empty($_POST)) {
 
 // エラー表示
 if(count($errors) === 0){
-    //print 'oklk;
-    $smarty->display( 'login_check.tpl' );
+    //$smarty->display( 'login_check.tpl' ); //この行でlogin_check.tplに移行させたいです
 }else{
     if(count($errors) > 0):
         foreach($errors as $value){
-            echo "<p>".$value."</p>";
-            //$smarty->assign('value', $value);//ここからlogin_form.tplの{$value}に表示させる
+            //echo "<p>".$value."</p>";
+            $smarty->assign('value', $value);   //ここからlogin_form.tplの{$value}に表示させる
     }   
     endif;
 }
-
-
-//$smarty->display('login_form.tpl');
-
-//header("Location: login_check.php");
 
 
 ?>

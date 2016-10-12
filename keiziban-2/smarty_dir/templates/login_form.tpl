@@ -9,6 +9,4 @@ pass :
 
 <!--ここでエラーを表示したい{$value}-->
 
-{$name}
-{$password}
 </form>
