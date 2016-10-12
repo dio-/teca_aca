@@ -1,13 +1,13 @@
 <?php
 header("Content-Type: text/html; charset=UTF-8");
-require_once '/home/miyuki/github/teca_aca/keiziban-2/smarty_dir/smarty/Smarty.class.php';
-require_once '/home/miyuki/github/teca_aca/database.php';
+require_once 'Smarty.class.php';
+require_once 'database.php';
 
 $smarty = new Smarty();
-$smarty->template_dir = '/home/miyuki/github/teca_aca/keiziban-2/smarty_dir/templates/';
-$smarty->compile_dir  = '/home/miyuki/github/teca_aca/keiziban-2/smarty_dir/templates_c/';
-$smarty->config_dir   = '/home/miyuki/github/teca_aca/keiziban-2/smarty_dir/configs/';
-$smarty->cache_dir    = '/home/miyuki/github/teca_aca/keiziban-2/smarty_dir/cache/';
+$smarty->template_dir = 'tmplates/';
+$smarty->compile_dir  = 'templates_c/';
+$smarty->config_dir   = 'configs/';
+$smarty->cache_dir    = 'cache/';
 
 try{
     $db = getDb();
