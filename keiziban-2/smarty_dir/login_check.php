@@ -1,7 +1,10 @@
 <?php
+#echo (__FILE__);   今のディレクトリを表示
 header("Content-Type: text/html; charset=UTF-8");
-require_once 'Smarty.class.php';
+require_once 'smarty/Smarty.class.php';
 require_once 'database.php';
+
+
 
 $smarty = new Smarty();
 $smarty->template_dir = 'tmplates/';
@@ -9,9 +12,16 @@ $smarty->compile_dir  = 'templates_c/';
 $smarty->config_dir   = 'configs/';
 $smarty->cache_dir    = 'cache/';
 
+
+$name = $_POST['name'];
+$contents = $_POST['contents'];
+$created = date('Y-m-d H:i:s');
+
+
 try{
     $db = getDb();
     $stt = $db -> prepare('INSERT INTO post(name, contents, created) VALUES(:name, :contents, :created)');
+
 
     // INSERT セット
     $stt->bindValue(":name", $name, PDO::PARAM_STR);
@@ -44,7 +54,7 @@ try{
 
 
 
-$smarty->display('login_check.tpl');
+$smarty->display('templates/login_check.tpl');
 
 $dbh = null;
 

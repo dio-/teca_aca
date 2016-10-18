@@ -44,7 +44,10 @@ if(empty($_POST)) {
 
 // エラー表示
 if(count($errors) === 0){
-    //$smarty->display( 'login_check.tpl' ); //この行でlogin_check.tplに移行させたいです
+    //$smarty->display( 'login_check.tpl' ); 
+    //header("Location: login_ckeck.php");
+
+    //この行でlogin_check.tplに移行させたいです
 }else{
     if(count($errors) > 0):
         foreach($errors as $value){
