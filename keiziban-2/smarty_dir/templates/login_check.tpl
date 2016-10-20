@@ -6,10 +6,9 @@
 
 <input type="submit" value="送信"><input type="reset" value="リセット">
 
-
-{$name}
-{$created}
-{$contents}
-
+<br>
+{foreach $posts as $postdata}
+  {$postdata.id}{$postdata.name|escape}<br>
+{/foreach}
 </form>
 

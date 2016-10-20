@@ -3,7 +3,7 @@ header("Content-Type: text/html; charset=UTF-8");
 
 function getDb() {
 	$dsn = 'mysql:dbname=miyukidb;host=localhost'; // mysql:dbname=データベース名;
-	$user = 'miyuki'; // ログインするユーザ名
+	$user = 'root'; // ログインするユーザ名
 	$password = 'm5014m'; // パスワード
  
 	try{

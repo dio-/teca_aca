@@ -7,7 +7,7 @@ require_once 'database.php';
 
 
 $smarty = new Smarty();
-$smarty->template_dir = 'tmplates/';
+$smarty->template_dir = 'templates/';
 $smarty->compile_dir  = 'templates_c/';
 $smarty->config_dir   = 'configs/';
 $smarty->cache_dir    = 'cache/';
@@ -27,21 +27,31 @@ try{
     $stt->bindValue(":name", $name, PDO::PARAM_STR);
     $stt->bindValue(":contents", $contents, PDO::PARAM_STR);
     $stt->bindValue(":created", $created, PDO::PARAM_STR);
+#var_dump($contents);
+#var_dump($name);
 
 
     // DB表示
-    $sql = 'select * from post order by id desc';
-    foreach ($db->query($sql) as $row) {
+    #$sql = 'select * from post order by id desc';
+    $sql = $db->query('select * from post order by id desc');
+    //foreach ($db->query($sql) as $row) 
+    //{
         //print('<br />');
         //print('ID:'.$row['id'].','.$row['created'].'<br />');
         //print('名前:'.$row['name']);
         //print('<br />');
         //print($row['contents']);
         //print('<br />');
-        $smarty->assign("name", $row['name']);
-        $smarty->assign("contents", $row['contents']);
-        $smarty->assign("created", $row['created']);
+        //$smarty->assign("name", $row['name']);
+        //$smarty->assign("contents", $row['contents']);
+        //$smarty->assign("created", $row['created']);
+    //}
+    $post = array();
+    while ($data = $sql->fetch(PDO::FETCH_ASSOC)) {
+        $post[] = $data;
     }
+    $smarty->assign('posts', $post);
+
 
      // INSERT 実行
      $stt->execute();
@@ -54,7 +64,9 @@ try{
 
 
 
-$smarty->display('templates/login_check.tpl');
+
+
+$smarty->display('login_check.tpl');
 
 $dbh = null;
 
