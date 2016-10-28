@@ -23,7 +23,7 @@ $smarty->assign('name', $name);
 $smarty->assign('password', $password);
 
 
-
+$_SESSION['name'] = $name;
 
 $smarty->display('login_form.tpl');
 
