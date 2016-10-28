@@ -16,11 +16,11 @@ $smarty->cache_dir    = 'cache/';
 
 var_dump($_SESSION['name']);
 
-#$name = $_POST['name'];
-$name = $_SESSION['name'];
+$name = $_POST['name'];
+#$name = $_SESSION['name'];
 
 #$_SESSION['name'] =  $_POST['name'];
-#$_SESSION['name'] =  $name;
+$_SESSION['name'] =  $name;
 $contents = $_POST['contents'];
 $created = date('Y-m-d H:i:s');
 
