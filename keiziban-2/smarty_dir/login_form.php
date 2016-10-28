@@ -1,6 +1,8 @@
 <?php
+session_start();
 header("Content-Type: text/html; charset=UTF-8");
 require_once 'smarty/Smarty.class.php';
+require_once 'database.php';
 
 $smarty = new Smarty();
 $smarty->template_dir = 'templates/';
@@ -13,12 +15,19 @@ $name = $_POST['name'];
 $password = $_POST['password'];
 
 
+//$_SESSION['name'] = $name;
+
 
 
 $smarty->assign('name', $name);
 $smarty->assign('password', $password);
 
+
+
+
 $smarty->display('login_form.tpl');
+
+$_SESSION['name'] = $name;
 
 // エラーの初期化
 $errors = array();
@@ -56,6 +65,7 @@ if(count($errors) === 0){
     }   
     endif;
 }
+
 
 
 ?>
