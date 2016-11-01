@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-10-28 13:06:49
+/* Smarty version 3.1.29, created on 2016-10-28 16:25:06
   from "/home/miyuki/github/tech_aca/keiziban-2/smarty_dir/templates/login_admin.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_5812ced9b02221_24547200',
+  'unifunc' => 'content_5812fd52d64721_10611713',
   'file_dependency' => 
   array (
     '8b40f76d8485f03bba2e2588a5ed24f264e04dd4' => 
     array (
       0 => '/home/miyuki/github/tech_aca/keiziban-2/smarty_dir/templates/login_admin.tpl',
-      1 => 1477566392,
+      1 => 1477639476,
       2 => 'file',
     ),
   ),
@@ -19,17 +19,16 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_5812ced9b02221_24547200 ($_smarty_tpl) {
+function content_5812fd52d64721_10611713 ($_smarty_tpl) {
 ?>
 <form action="login_admin.php" method="post">
-名前：
-<input type="text" name="name" size="40"><br>
+
+名前:  <?php echo $_SESSION['name'];?>
+<br>
 本文:
 <textarea name="contents" rows="4" cols="40"></textarea>
 
 <input type="submit" value="送信"><input type="reset" value="リセット">
-
-<?php echo $_SESSION['name'];?>
 
 
 <br>

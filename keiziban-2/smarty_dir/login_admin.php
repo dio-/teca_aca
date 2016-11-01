@@ -4,9 +4,6 @@ header("Content-Type: text/html; charset=UTF-8");
 require_once 'smarty/Smarty.class.php';
 require_once 'database.php';
 
-#var_dump(session_start());
-
-
 
 $smarty = new Smarty();
 $smarty->template_dir = 'templates/';
@@ -14,24 +11,18 @@ $smarty->compile_dir  = 'templates_c/';
 $smarty->config_dir   = 'configs/';
 $smarty->cache_dir    = 'cache/';
 
-var_dump($_SESSION['name']);
 
-$name = $_POST['name'];
-#$name = $_SESSION['name'];
+if (!empty($_POST['name'])) {
+    $name = $_POST['name'];
+    $_SESSION['name'] = $name;
+}else{
+    $name = $_SESSION['name'];
+}
 
-#$_SESSION['name'] =  $_POST['name'];
-$_SESSION['name'] =  $name;
 $contents = $_POST['contents'];
 $created = date('Y-m-d H:i:s');
 
 
-
-var_dump($_POST['name']);
-var_dump($name);
-var_dump($_SESSION['name']);
-
-
- 
 
 // ログイン状態のチェック
 if (!isset($_SESSION["name"])) {
