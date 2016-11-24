@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-10-28 16:25:06
+/* Smarty version 3.1.29, created on 2016-11-24 15:08:01
   from "/home/miyuki/github/tech_aca/keiziban-2/smarty_dir/templates/login_admin.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_5812fd52d64721_10611713',
+  'unifunc' => 'content_583683c10bb815_27435565',
   'file_dependency' => 
   array (
     '8b40f76d8485f03bba2e2588a5ed24f264e04dd4' => 
     array (
       0 => '/home/miyuki/github/tech_aca/keiziban-2/smarty_dir/templates/login_admin.tpl',
-      1 => 1477639476,
+      1 => 1479967630,
       2 => 'file',
     ),
   ),
@@ -19,7 +19,7 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_5812fd52d64721_10611713 ($_smarty_tpl) {
+function content_583683c10bb815_27435565 ($_smarty_tpl) {
 ?>
 <form action="login_admin.php" method="post">
 
@@ -60,5 +60,10 @@ $_smarty_tpl->tpl_vars['postdata'] = $__foreach_postdata_0_saved_item;
 ?>
 </form>
 
+<form action="logout.php" method="post">
+<input type="submit" value="ログアウト">
+
+
+</form>
 <?php }
 }

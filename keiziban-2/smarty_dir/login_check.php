@@ -59,12 +59,6 @@ if(count($errors) === 0){
 
             $password_hash = $row['password'];
 
-            //var_dump($password_hash);
-            //var_dump($password);
-            //var_dump($_POST["password"]);
-            //var_dump($row['password']);
-
-
             $hashpass = password_hash($password, 'samitani');
             var_dump($hashpass);
             var_dump($password_hash);

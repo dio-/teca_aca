@@ -32,8 +32,6 @@ if (!isset($_SESSION["name"])) {
 }
 
 
-
-
 try{
     $db = getDb();
     $stt = $db -> prepare('INSERT INTO post(name, contents, created) VALUES(:name, :contents, :created)');

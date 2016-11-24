@@ -44,7 +44,7 @@ if(empty($_POST)) {
 
 }
 
-
+var_dump(count($errors));
 // エラー表示
 if(count($errors) === 0){
     try{
@@ -56,21 +56,19 @@ if(count($errors) === 0){
         $stt->bindValue(':name', $name, PDO::PARAM_STR);
         $stt->execute();
 
-
-        //アカウントが一致するかどうか調べる
+        //アカウントが一致するかどうか調べるここから通ってない
         if($row = $stt->fetch()){
-
             $password_hash = $row['password'];
 
             //var_dump($password_hash);
             //var_dump($password);
-            //var_dump($_POST["password"]);
+            var_dump($_POST["password"]);
             //var_dump($row['password']);
 
 
-            $hashpass = password_hash($password, 'samitani');
-            var_dump($hashpass);
-            var_dump($password_hash);
+            //$hashpass = password_hash($password, 'samitani');
+            //var_dump($hashpass);
+            //var_dump($password_hash);
 
             //パスワードが一致するかどうか調べる
             //if (password_verify($password, $password_hash)) {
@@ -88,6 +86,7 @@ if(count($errors) === 0){
 
             }
         }else{
+            $db = null;
             $errors['name'] = "アカウント及びパスワードが一致しません。";
         }
 

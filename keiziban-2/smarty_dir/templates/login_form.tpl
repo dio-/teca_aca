@@ -7,6 +7,6 @@ pass :
 
 <input type="submit" value="送信"><input type="reset" value="リセット">
 
-<!--ここでエラーを表示したい{$value}-->
+{$value}
 
 </form>

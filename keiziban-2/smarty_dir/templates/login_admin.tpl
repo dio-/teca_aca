@@ -6,7 +6,6 @@
 
 <input type="submit" value="送信"><input type="reset" value="リセット">
 
-
 <br>
 {foreach $posts as $postdata}
   {$postdata.id}  {$postdata.created}
@@ -15,3 +14,7 @@
 {/foreach}
 </form>
 
+<form action="logout.php" method="post">
+<input type="submit" value="ログアウト">
+
+</form>
