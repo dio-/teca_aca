@@ -32,7 +32,6 @@ try{
 
             // INSERT セット
             $stt->bindValue(":name", $name, PDO::PARAM_STR);
-            //$stt->bindValue(":password", $hashpass, PDO::PARAM_STR);
             $stt->bindValue(":password", $password, PDO::PARAM_STR);
 
             // INSERT 実行

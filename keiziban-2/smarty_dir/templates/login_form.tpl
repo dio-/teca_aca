@@ -1,4 +1,4 @@
-<form action="login_form.php" method="post">
+<form action="login_check.php" method="post">
 ID：
 <input type="text" name="name" size="40"><br>
 pass :

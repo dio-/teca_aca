@@ -26,7 +26,6 @@ $created = date('Y-m-d H:i:s');
 
 // ログイン状態のチェック
 if (!isset($_SESSION["name"])) {
-    //header("Location: login_form.php"); 
     print 'ng';
     exit();
 }
@@ -44,7 +43,6 @@ try{
 
 
     // DB表示
-    #$sql = 'select * from post order by id desc';
     $sql = $db->query('select * from post order by id desc');
     $post = array();
     while ($data = $sql->fetch(PDO::FETCH_ASSOC)) {

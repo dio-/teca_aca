@@ -27,7 +27,7 @@ if(isset($_POST['num1']) && isset($_POST['calc1'])) {
                 break;
             case 1: // 引き算
                 $result = $num1 - $num2;
-		break;
+        		break;
             case 2: // 掛け算
                 $result = $num1 * $num2;
                 break;

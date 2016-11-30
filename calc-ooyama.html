@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+  <html lang="ja">
+    <head>
+      <meta charset="UTF-8">
+      <title>電卓</title> 
+    </head>
+    <body>
+      <form action="calc1111-3.php" method="post">
+        <input type= "text" name="left" size=3>
+      
+        <select name="symbol" size=1>
+          <option value="">選択してください</option>
+          <option value="＋">＋</option>
+          <option value="－">－</option>
+          <option value="×">×</option>
+          <option value="÷">÷</option>
+        </select>
+       
+        <input type="text" name="right" size=3> =?
+        <br>
+        <input type="submit" value="計算">
+        <input type="reset" value="クリア">
+        
+      </form>
+      <p>計算結果：
+      <?php if($answer == true)
+      echo ($left.'    '.$_POST['symbol'].'    '.$right.'    '.'='.'    '.$answer); ?></p>
+      
+    </body>
+</html>
