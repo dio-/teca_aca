@@ -18,7 +18,7 @@ $smarty->assign('name', $name);
 $smarty->assign('password', $password);
 
 $smarty->display('login_form.tpl');
-
+///*
 $name = $_POST['name'];
 $password = $_POST['password'];
 
@@ -55,25 +55,15 @@ if(count($errors) == 0){
         $stt->bindValue(':name', $name, PDO::PARAM_STR);
         $stt->execute();
 
-        //var_dump($row);
-        //var_dump($stt->fetch());
-
-        //var_dump($_SESSION['name']);
-
-
         //アカウントが一致するかどうか調べるここから通ってない
         if($row = $stt->fetch()){
 
             if($password == $row['password']){
-                var_dump($password);
-                var_dump($row['password']);
-
-                //セッションハイジャック対策
-                session_regenerate_id(true);
 
                 $_SESSION['name'] = $name;
-                print ('ok');
-
+                $url = "login_admin.php";
+                header("Location: ".$url);
+        
                // exit();
             }else{
                 //$errors['password'] = "アカウント及びパスワードが一致しません。";
@@ -107,6 +97,6 @@ print ('c');
     endif;
 }
 
-
+//*/
 
 ?>

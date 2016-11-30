@@ -3,93 +3,99 @@ session_start();
 header("Content-Type: text/html; charset=UTF-8");
 require_once 'smarty/Smarty.class.php';
 require_once 'database.php';
+$db = getDb();
 
 $smarty = new Smarty();
 $smarty->template_dir = 'templates/';
 $smarty->compile_dir  = 'templates_c/';
 $smarty->config_dir   = 'configs/';
 $smarty->cache_dir    = 'cache/';
- 
- 
-$db = getDb();
- 
-//エラーメッセージの初期化
-$errors = array();
- 
-if(empty($_POST)) {
-    header("Location: login_form.php");
-    exit();
-}else{
-    //POSTされたデータを各変数に入れる
-    $name = isset($_POST['name']) ? $_POST['name'] : NULL;
-    $password = isset($_POST['password']) ? $_POST['password'] : NULL;
-    
-    //アカウント入力判定
-    if ($name == ''){
-        $errors['name'] = "アカウントが入力されていません。";
-    }   
 
-    //パスワード入力判定
-    if ($password == ''){
+$_SESSION = array();
+
+
+$name = $_POST['name'];
+$password = $_POST['password'];
+
+
+// エラーの初期化
+$errors = array();
+
+if(empty($_POST)) {
+    $errors['name'] = "何も書かれていません";
+}else{
+    // アカウントの入力判定
+    if ($name == '') {
+        $errors['name'] = "IDがないです。";
+    }
+    // パスワードの入力判定
+    if ($password == '') {
         $errors['password'] = "パスワードが入力されていません。";
     }elseif(!preg_match('/^[0-9a-zA-Z]+$/', $_POST["password"])){
         $errors['password_length'] = "パスワードは半角英数字で入力して下さい。";
-    }else{
-        $password_hide = str_repeat('*', strlen($password));
-    } 
+    }
+
+
+
 }
-
-
-//エラーが無ければ実行する
-if(count($errors) === 0){ 
+// エラー表示
+if(count($errors) == 0){
     try{
         //例外処理を投げる（スロー）ようにする
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
+        //var_dump($name);
+
         //アカウントで検索
         $stt = $db->prepare("SELECT * FROM member WHERE name = '" . $name . "'");
         $stt->bindValue(':name', $name, PDO::PARAM_STR);
         $stt->execute();
 
- 
-        //アカウントが一致するかどうか調べる
+        //アカウントが一致するかどうか調べるここから通ってない
         if($row = $stt->fetch()){
 
-            //var_dump($row['password']);
-
-            $password_hash = $row['password'];
-
-            $hashpass = password_hash($password, 'samitani');
-            var_dump($hashpass);
-            var_dump($password_hash);
-
- 
-            //パスワードが一致するかどうか調べる
-            //if (password_verify($password, $password_hash)) {
             if($password == $row['password']){
-                var_dump($password);
-    
+
                 //セッションハイジャック対策
                 session_regenerate_id(true);
 
                 $_SESSION['name'] = $name;
-                header("Location: login_admin.php"); //ログイン画面に
-                exit();
+  
+                var_dump($name);
+                var_dump($_SESSION['name']);
+                header("Location: login_admin.php"); 
+
+               // exit();
             }else{
-                $errors['password'] = "アカウント及びパスワードが一致しません。";
+                //$errors['password'] = "アカウント及びパスワードが一致しません。";
+                print ('アカウント及びパスワードが一致しません。');
+                print ('a');
 
             }
         }else{
+            //$db = null;
             $errors['name'] = "アカウント及びパスワードが一致しません。";
+            print ('アカウント及びパスワードが一致しません。');
+            print ('b');
         }
 
         //データベース接続切断
         $db = null;
-
+print ('c');
     }catch (PDOException $e){
         print('Error:'.$e->getMessage());
         die();
     }
+
+
+}else{
+    print ('qw');
+    if(count($errors) > 0):
+       foreach($errors as $value){
+            //echo "<p>".$value."</p>";
+            $smarty->assign('value', $value);   //ここからlogin_form.tplの{$value}に表示させる
+       } 
+    endif;
 }
+
 
 ?>
