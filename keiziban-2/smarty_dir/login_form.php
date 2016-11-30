@@ -11,29 +11,28 @@ $smarty->compile_dir  = 'templates_c/';
 $smarty->config_dir   = 'configs/';
 $smarty->cache_dir    = 'cache/';
 
+$_SESSION = array();
 
-$name = $_POST['name'];
-$password = $_POST['password'];
 
 $smarty->assign('name', $name);
 $smarty->assign('password', $password);
 
-
-
 $smarty->display('login_form.tpl');
+
+$name = $_POST['name'];
+$password = $_POST['password'];
 
 
 // エラーの初期化
 $errors = array();
 
 if(empty($_POST)) {
-    //header("Location: login_form.php"); //headerが使えない
+    $errors['name'] = "何も書かれていません";
 }else{
     // アカウントの入力判定
     if ($name == '') {
         $errors['name'] = "IDがないです。";
     }
-
     // パスワードの入力判定
     if ($password == '') {
         $errors['password'] = "パスワードが入力されていません。";
@@ -42,68 +41,69 @@ if(empty($_POST)) {
     }
 
 
-}
 
-var_dump(count($errors));
+}
 // エラー表示
-if(count($errors) === 0){
+if(count($errors) == 0){
     try{
         //例外処理を投げる（スロー）ようにする
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //var_dump($name);
 
         //アカウントで検索
         $stt = $db->prepare("SELECT * FROM member WHERE name = '" . $name . "'");
         $stt->bindValue(':name', $name, PDO::PARAM_STR);
         $stt->execute();
 
+        //var_dump($row);
+        //var_dump($stt->fetch());
+
+        //var_dump($_SESSION['name']);
+
+
         //アカウントが一致するかどうか調べるここから通ってない
         if($row = $stt->fetch()){
-            $password_hash = $row['password'];
 
-            //var_dump($password_hash);
-            //var_dump($password);
-            var_dump($_POST["password"]);
-            //var_dump($row['password']);
-
-
-            //$hashpass = password_hash($password, 'samitani');
-            //var_dump($hashpass);
-            //var_dump($password_hash);
-
-            //パスワードが一致するかどうか調べる
-            //if (password_verify($password, $password_hash)) {
             if($password == $row['password']){
                 var_dump($password);
+                var_dump($row['password']);
 
                 //セッションハイジャック対策
                 session_regenerate_id(true);
 
                 $_SESSION['name'] = $name;
-                header("Location: login_admin.php"); //ログイン画面に
-                exit();
+                print ('ok');
+
+               // exit();
             }else{
-                $errors['password'] = "アカウント及びパスワードが一致しません。";
+                //$errors['password'] = "アカウント及びパスワードが一致しません。";
+                print ('アカウント及びパスワードが一致しません。');
+                print ('a');
 
             }
         }else{
-            $db = null;
+            //$db = null;
             $errors['name'] = "アカウント及びパスワードが一致しません。";
+            print ('アカウント及びパスワードが一致しません。');
+            print ('b');
         }
 
         //データベース接続切断
         $db = null;
-
+print ('c');
     }catch (PDOException $e){
         print('Error:'.$e->getMessage());
         die();
     }
 
+
 }else{
+    print ('qw');
     if(count($errors) > 0):
-        foreach($errors as $value){
+       foreach($errors as $value){
             //echo "<p>".$value."</p>";
             $smarty->assign('value', $value);   //ここからlogin_form.tplの{$value}に表示させる
-    }   
+       } 
     endif;
 }
 
