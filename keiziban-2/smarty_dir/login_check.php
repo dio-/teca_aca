@@ -36,9 +36,6 @@ if(empty($_POST)) {
 }
 
 
-#if( preg_match( "/[\x8E\xA1-\xFE]/", $file )){
-#print "全角文字が含まれています。\n";
-#}
 
 if(count($errors) == 0){
     try{
