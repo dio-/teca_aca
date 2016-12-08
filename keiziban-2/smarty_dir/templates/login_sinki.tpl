@@ -1,4 +1,4 @@
-<form action="login_sinki.php" method="post">
+<form action="login_sinki2.php" method="post">
 ID：
 <input type="text" name="name" size="40"><br>
 
@@ -11,6 +11,6 @@ pass :
 </form>
 
 <form action="login_form.php" method="post">
-<input type="submit" value="戻る">
+<input type="submit" value="ログイン画面に戻る">
 
 </form>

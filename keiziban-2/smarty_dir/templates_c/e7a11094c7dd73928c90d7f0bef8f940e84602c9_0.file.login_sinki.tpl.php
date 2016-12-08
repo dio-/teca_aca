@@ -1,17 +1,17 @@
 <?php
-/* Smarty version 3.1.29, created on 2016-11-24 17:18:56
+/* Smarty version 3.1.29, created on 2016-12-08 16:53:49
   from "/home/miyuki/github/tech_aca/keiziban-2/smarty_dir/templates/login_sinki.tpl" */
 
 if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl, array (
   'has_nocache_code' => false,
   'version' => '3.1.29',
-  'unifunc' => 'content_5836a2705b1701_72476362',
+  'unifunc' => 'content_5849118db36be9_32127473',
   'file_dependency' => 
   array (
     'e7a11094c7dd73928c90d7f0bef8f940e84602c9' => 
     array (
       0 => '/home/miyuki/github/tech_aca/keiziban-2/smarty_dir/templates/login_sinki.tpl',
-      1 => 1479975492,
+      1 => 1481183602,
       2 => 'file',
     ),
   ),
@@ -19,9 +19,9 @@ if ($_smarty_tpl->smarty->ext->_validateCompiled->decodeProperties($_smarty_tpl,
   array (
   ),
 ),false)) {
-function content_5836a2705b1701_72476362 ($_smarty_tpl) {
+function content_5849118db36be9_32127473 ($_smarty_tpl) {
 ?>
-<form action="login_sinki.php" method="post">
+<form action="login_sinki2.php" method="post">
 ID：
 <input type="text" name="name" size="40"><br>
 
@@ -34,7 +34,7 @@ pass :
 </form>
 
 <form action="login_form.php" method="post">
-<input type="submit" value="戻る">
+<input type="submit" value="ログイン画面に戻る">
 
 </form>
 <?php }

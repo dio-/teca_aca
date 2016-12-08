@@ -16,12 +16,16 @@ $password = $_POST['password'];
 
 // エラーの初期化
 $errors = array();
+
+
 if(empty($_POST)) {
     $errors['name'] = "何も書かれていません";
 }else{
     // アカウントの入力判定
     if ($name == '') {
         $errors['name'] = "IDがないです。";
+    }elseif(preg_match("/[\x8E\xA1-\xFE]/", $name)){
+        print "IDは半角英数で入力してください。";
     }
     // パスワードの入力判定
     if ($password == '') {
@@ -30,7 +34,12 @@ if(empty($_POST)) {
         $errors['password_length'] = "パスワードは半角英数字で入力して下さい。";
     }
 }
-// エラー表示
+
+
+#if( preg_match( "/[\x8E\xA1-\xFE]/", $file )){
+#print "全角文字が含まれています。\n";
+#}
+
 if(count($errors) == 0){
     try{
         //例外処理を投げる（スロー）ようにする
@@ -39,31 +48,34 @@ if(count($errors) == 0){
         $stt = $db->prepare("SELECT * FROM member WHERE name = '" . $name . "'");
         $stt->bindValue(':name', $name, PDO::PARAM_STR);
         $stt->execute();
-        //アカウントが一致するかどうか調べるここから通ってない
+
+
         if($row = $stt->fetch()){
             if($password == $row['password']){
-                //セッションハイジャック対策
                 session_regenerate_id(true);
                 $_SESSION['name'] = $name;
+                header('location: login_admin.php');
+                exit();
   
-                header("Location: login_admin.php"); 
             }else{
                 $errors['password'] = "アカウント及びパスワードが一致しません。";
             }
         }else{
             $errors['name'] = "アカウント及びパスワードが一致しません。";
         }
+
         //データベース接続切断
         $db = null;
     }catch (PDOException $e){
         print('Error:'.$e->getMessage());
         die();
     }
-}else{
-    if(count($errors) > 0):
-       foreach($errors as $value){
-            $smarty->assign('value', $value);   //ここからlogin_form.tplの{$value}に表示させる
-       } 
-    endif;
 }
+
+foreach($errors as $value){
+     $smarty->assign('value', $value);
+}
+
+
+$smarty->display('login_check.tpl');
 ?>

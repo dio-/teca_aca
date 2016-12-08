@@ -14,7 +14,6 @@ $smarty->cache_dir    = 'cache/';
 
 
 $value = 'ログアウトしました。';
-//print 'ログアウトしました';
 
 $smarty->assign('value', $value); 
 
